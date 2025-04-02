@@ -1,0 +1,15 @@
+@import 'tailwindcss';
+
+:root {
+  font-family: 'Figtree Variable', sans-serif;
+}
+
+html,
+body,
+.main-layout-container {
+  @apply w-full h-full m-0 bg-white;
+}
+
+html {
+  @apply h-full overflow-auto;
+}
