@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { InputProps } from '@models/typesFile';
+import type { InputProps } from '@typesOrigin/recruitment';
 import { defineProps } from 'vue';
 
 const { label, classes, id, placeholder } = defineProps<InputProps>();

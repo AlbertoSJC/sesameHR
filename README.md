@@ -12,6 +12,10 @@ npm i
 
 npm run dev
 
+launch tests with
+
+npm run test
+
 We can also start it in Docker, in order to do that, we need to have docker installed
 
 Docker 28.0.1

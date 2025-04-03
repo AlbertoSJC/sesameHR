@@ -1,11 +1,6 @@
 {
+  "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "Node16",
-    "moduleResolution": "node16",
-    "strict": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
     "types": ["vitest/globals"],
     "baseUrl": ".",
     "paths": {
@@ -15,9 +10,19 @@
       "@stores/*": ["src/stores/*"],
       "@domain/*": ["src/domain/*"],
       "@tests/*": ["tests/*"],
-      "@models/*": ["src/types/*"]
+      "@typesOrigin/*": ["src/types/*"],
+      "@styles/*": ["src/styles/*"],
+      "@services/*": ["src/services/*"]
     },
     "esModuleInterop": true
   },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "src/**/*.astro",
+    "tests/**/*.ts" // Ensure tests directory is included
+  ],
   "exclude": ["node_modules"]
 }

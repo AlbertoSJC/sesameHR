@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { InputProps } from '@models/typesFile';
+import { InputProps } from '@typesOrigin/recruitment';
 import { defineProps, watch } from 'vue';
 
 interface PropsModel {
