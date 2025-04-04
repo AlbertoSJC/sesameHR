@@ -2,14 +2,21 @@ import ButtonElement from '@components/common/ButtonElement.vue';
 import { mount } from '@vue/test-utils';
 
 describe('ButtonElement.vue', () => {
-  it('renders the button with the correct text', () => {
+  test('Should mount correctly', () => {
+    const wrapper = mount(ButtonElement, {
+      props: { text: 'button' },
+    });
+
+    expect(wrapper).toBeDefined();
+  });
+  test('Should render the button with the correct text', () => {
     const wrapper = mount(ButtonElement, {
       props: { text: 'Click Me' },
     });
     expect(wrapper.text()).toBe('Click Me');
   });
 
-  it('applies disabled styles when the disabled prop is true', () => {
+  test('Should apply disabled styles when the disabled prop is true', () => {
     const wrapper = mount(ButtonElement, {
       props: { text: 'Click Me', disabled: true },
     });
@@ -18,7 +25,7 @@ describe('ButtonElement.vue', () => {
     expect(button.classes()).toContain('pointer-events-none');
   });
 
-  it('applies additional classes passed via the classes prop', () => {
+  test('Should apply additional classes passed via the classes prop', () => {
     const wrapper = mount(ButtonElement, {
       props: { text: 'Click Me', classes: 'custom-class' },
     });
@@ -26,7 +33,7 @@ describe('ButtonElement.vue', () => {
     expect(button.classes()).toContain('custom-class');
   });
 
-  it('is clickable when not disabled', async () => {
+  test('Should be clickable when not disabled', async () => {
     const wrapper = mount(ButtonElement, {
       props: { text: 'Click Me' },
     });

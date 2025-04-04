@@ -15,6 +15,10 @@ describe('Text Input', () => {
     wrapper = mount(TextInput, { props: exampleProps });
   });
 
+  test('Should mount correctly', () => {
+    expect(wrapper).toBeDefined();
+  });
+
   test('Should render input with correct attributes', () => {
     const input = wrapper.find('input');
     expect(input.attributes('id')).toBe('test-id');
