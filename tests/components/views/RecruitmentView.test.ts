@@ -12,6 +12,7 @@ describe('RecruitmentView', () => {
     wrapper = shallowMount(RecruitmentView);
     setActivePinia(createPinia());
   });
+
   test('Should mount', () => {
     expect(wrapper).toBeDefined();
   });

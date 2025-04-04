@@ -3,7 +3,12 @@ import { shallowMount } from '@vue/test-utils';
 import CompanySidebar from '@components/sidebar/CompanySidebar.vue';
 
 describe('CompanySidebar', () => {
-  test('should render the component correctly', () => {
+  test('Should mount', () => {
+    const wrapper = shallowMount(CompanySidebar);
+    expect(wrapper).toBeDefined();
+  });
+
+  test('Should render the component correctly', () => {
     const wrapper = shallowMount(CompanySidebar);
     const rootDiv = wrapper.find('div');
     expect(rootDiv.exists()).toBe(true);
@@ -15,7 +20,7 @@ describe('CompanySidebar', () => {
     expect(rootDiv.classes()).toContain('shadow-inset-lg');
   });
 
-  test('should render the component child classes correctly', () => {
+  test('Should render the component child classes correctly', () => {
     const wrapper = shallowMount(CompanySidebar);
     const childDivs = wrapper.findAll('.shadow-inset-lg > div');
 

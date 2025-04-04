@@ -1,10 +1,15 @@
 import { describe, test, expect } from 'vitest';
 import { shallowMount } from '@vue/test-utils';
 import RecruitmentContainer from '@components/recruitment/RecruitmentContainer.vue';
-import VacanciesContainer from '@components/recruitment/vacancy/VacanciesContainer.vue';
+import VacanciesContainer from '@components/recruitment/RecruitmentManagement.vue';
 
 describe('RecruitmentContainer', () => {
-  test('should render the root div with correct classes', () => {
+  test('Should mount', () => {
+    const wrapper = shallowMount(RecruitmentContainer);
+    expect(wrapper).toBeDefined();
+  });
+
+  test('Should render the root div with correct classes', () => {
     const wrapper = shallowMount(RecruitmentContainer);
     const rootDiv = wrapper.find('div');
     expect(rootDiv.exists()).toBe(true);
@@ -16,7 +21,7 @@ describe('RecruitmentContainer', () => {
     expect(rootDiv.classes()).toContain('gap-4');
   });
 
-  test('should render the header div with correct classes', () => {
+  test('Should render the header div with correct classes', () => {
     const wrapper = shallowMount(RecruitmentContainer);
     const headerDiv = wrapper.find('#recruitment-container > div');
     expect(headerDiv.exists()).toBe(true);
@@ -25,7 +30,7 @@ describe('RecruitmentContainer', () => {
     expect(headerDiv.classes()).toContain('justify-between');
   });
 
-  test('should render the heading with correct text and classes', () => {
+  test('Should render the heading with correct text and classes', () => {
     const wrapper = shallowMount(RecruitmentContainer);
     const heading = wrapper.find('h1');
     expect(heading.exists()).toBe(true);
@@ -35,7 +40,7 @@ describe('RecruitmentContainer', () => {
     expect(heading.classes()).toContain('text-[#1f2d52]');
   });
 
-  test('should render the image with correct attributes and classes', () => {
+  test('Should render the image with correct attributes and classes', () => {
     const wrapper = shallowMount(RecruitmentContainer);
     const image = wrapper.find('img');
 
@@ -48,7 +53,7 @@ describe('RecruitmentContainer', () => {
     expect(image.classes()).toContain('min-w-[50px]');
   });
 
-  test('should render the VacanciesContainer component', () => {
+  test('Should render the VacanciesContainer component', () => {
     const wrapper = shallowMount(RecruitmentContainer);
     const vacanciesContainer = wrapper.findComponent(VacanciesContainer);
     expect(vacanciesContainer.exists()).toBe(true);

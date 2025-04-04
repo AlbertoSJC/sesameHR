@@ -1,6 +1,6 @@
 import { describe, test, expect, beforeEach } from 'vitest';
-import { shallowMount } from '@vue/test-utils';
-import HeaderTabs from '@components/recruitment/vacancy/HeaderTabs.vue';
+import { mount } from '@vue/test-utils';
+import HeaderTabs from '@components/recruitment/HeaderTabs.vue';
 import { useRecruitmentStore } from '@stores/recruitment';
 import { createPinia, setActivePinia } from 'pinia';
 import type { RecruitmentTabs } from '@typesOrigin/recruitment';
@@ -10,15 +10,15 @@ describe('HeaderTabs', () => {
     setActivePinia(createPinia());
   });
 
-  test('should mount correctly', () => {
-    const wrapper = shallowMount(HeaderTabs);
+  test('Should mount correctly', () => {
+    const wrapper = mount(HeaderTabs);
 
     expect(wrapper).toBeDefined();
   });
 
-  test('should render tabs correctly', () => {
+  test('Should render tabs correctly', () => {
     const recruitmentStore = useRecruitmentStore();
-    const wrapper = shallowMount(HeaderTabs);
+    const wrapper = mount(HeaderTabs);
 
     const tabs = wrapper.findAll('span');
     expect(tabs.length).toBe(Object.keys(recruitmentStore.vacancyTabs).length);
@@ -31,9 +31,9 @@ describe('HeaderTabs', () => {
     });
   });
 
-  test('should update active tab on click', async () => {
+  test('Should update active tab on click', async () => {
     const recruitmentStore = useRecruitmentStore();
-    const wrapper = shallowMount(HeaderTabs);
+    const wrapper = mount(HeaderTabs);
 
     const tabs = wrapper.findAll('span');
     const secondTab = tabs[1];

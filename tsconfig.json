@@ -16,13 +16,6 @@
     },
     "esModuleInterop": true
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "src/**/*.astro",
-    "tests/**/*.ts" // Ensure tests directory is included
-  ],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.astro", "tests/**/*.ts"],
   "exclude": ["node_modules"]
 }

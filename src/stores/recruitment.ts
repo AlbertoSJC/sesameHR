@@ -6,6 +6,7 @@ import { ref } from 'vue';
 export const useRecruitmentStore = defineStore('recruitment', () => {
   const loading = ref<boolean>(false);
   const vacancyStatuses = ref<VacancyStatus[] | null>(null);
+  const recruitmentFilterInput = ref<string>('');
   const vacancyTabs = ref<Record<RecruitmentTabs, boolean>>({
     [RecruitmentTabs.Vacancies]: true,
     [RecruitmentTabs.Candidates]: false,
@@ -15,5 +16,6 @@ export const useRecruitmentStore = defineStore('recruitment', () => {
     loading,
     vacancyStatuses,
     vacancyTabs,
+    recruitmentFilterInput,
   };
 });

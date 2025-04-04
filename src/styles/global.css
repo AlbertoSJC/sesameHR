@@ -21,3 +21,22 @@ html {
 .shadow-outset-lg {
   box-shadow: 0px 1px 9px 5px #2f299908;
 }
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: white;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #1f2d52;
+  border-radius: 6px;
+  border: 1px solid white;
+}
+
+.scroll-container {
+  scrollbar-color: #1f2d52 white;
+  scrollbar-width: thin;
+}

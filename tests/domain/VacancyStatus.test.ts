@@ -1,11 +1,11 @@
-import { VacancyStatus, type VacancyStatusInformation } from '@domain/VacancyStatus';
+import { VacancyStatus, VacancyStatusText, type VacancyStatusInformation } from '@domain/VacancyStatus';
 import { describe, expect, test } from 'vitest';
 
 describe('VacancyStatus', () => {
   test('should correctly initialize properties from VacancyStatusInformation', () => {
     const data: VacancyStatusInformation = {
       id: '123',
-      name: 'Open',
+      name: VacancyStatusText.Default,
       order: 1,
       companyId: '456',
       vacancyId: '789',
@@ -27,7 +27,7 @@ describe('VacancyStatus', () => {
   test('should handle optional fields correctly', () => {
     const data: VacancyStatusInformation = {
       id: '123',
-      name: 'Closed',
+      name: VacancyStatusText.Selected,
       order: 2,
       companyId: '456',
       vacancyId: '789',

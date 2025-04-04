@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import VacanciesContainer from './vacancy/VacanciesContainer.vue';
+import RecruitmentManagement from './RecruitmentManagement.vue';
 </script>
 
 <template>
@@ -8,6 +8,6 @@ import VacanciesContainer from './vacancy/VacanciesContainer.vue';
       <h1 class="text-5xl font-bold text-[#1f2d52]">Reclutamiento</h1>
       <img src="/src/images/profile-image.jpg" class="rounded-[50%] max-h-[50px] max-w-[50px] min-h-[50px] min-w-[50px]" />
     </div>
-    <VacanciesContainer />
+    <RecruitmentManagement />
   </div>
 </template>

@@ -2,7 +2,7 @@ import { describe, test, expect, beforeEach } from 'vitest';
 import { setActivePinia, createPinia } from 'pinia';
 import { useRecruitmentStore } from '@stores/recruitment';
 import { RecruitmentTabs } from '@typesOrigin/recruitment';
-import type { VacancyStatus } from '@domain/VacancyStatus';
+import { VacancyStatusText, type VacancyStatus } from '@domain/VacancyStatus';
 
 describe('useRecruitmentStore', () => {
   beforeEach(() => {
@@ -36,7 +36,7 @@ describe('useRecruitmentStore', () => {
     const mockStatuses: VacancyStatus[] = [
       {
         id: '1',
-        name: 'Open',
+        name: VacancyStatusText.Offer,
         order: 1,
         companyId: '123',
         vacancyId: '456',

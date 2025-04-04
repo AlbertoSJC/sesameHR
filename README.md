@@ -26,4 +26,4 @@ docker build -t sesame-app .
 
 docker run -p 4321:4321 sesame-app
 
-(clarify that the name sesame-app can be changed to whatever)
+(clarify that the name sesame-app can be changed to whatever in both commands)

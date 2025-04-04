@@ -3,7 +3,12 @@ import { shallowMount } from '@vue/test-utils';
 import DecorativeSidebar from '@components/sidebar/DecorativeSidebar.vue';
 
 describe('DecorativeSidebar', () => {
-  test('should render the component correctly', () => {
+  test('Should mount', () => {
+    const wrapper = shallowMount(DecorativeSidebar);
+    expect(wrapper).toBeDefined();
+  });
+
+  test('Should render the component correctly', () => {
     const wrapper = shallowMount(DecorativeSidebar);
 
     const div = wrapper.find('div');

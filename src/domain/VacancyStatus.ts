@@ -1,6 +1,15 @@
+export enum VacancyStatusText {
+  New = 'Nuevo',
+  InProgress = 'En proceso',
+  Offer = 'Oferta',
+  Selected = 'Seleccionado',
+  Discarded = 'Descartado',
+  Default = 'Default',
+}
+
 export interface VacancyStatusInformation {
   id: string;
-  name: string;
+  name: VacancyStatusText;
   order: number;
   companyId: string;
   vacancyId: string;
@@ -10,7 +19,7 @@ export interface VacancyStatusInformation {
 
 export class VacancyStatus implements VacancyStatusInformation {
   id: string;
-  name: string;
+  name: VacancyStatusText;
   order: number;
   companyId: string;
   vacancyId: string;
