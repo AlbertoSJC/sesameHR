@@ -1,3 +1,4 @@
+import LoaderElement from '@components/common/LoaderElement.vue';
 import CandidatesTab from '@components/recruitment/candidates/CandidatesTab.vue';
 import HeaderTabs from '@components/recruitment/HeaderTabs.vue';
 import HeaderTools from '@components/recruitment/HeaderTools.vue';
@@ -7,7 +8,7 @@ import { VacancyStatusText } from '@domain/VacancyStatus';
 import apiService from '@services/apiService';
 import { useRecruitmentStore } from '@stores/recruitment';
 import { RecruitmentTabs } from '@typesOrigin/recruitment';
-import { mount } from '@vue/test-utils';
+import { flushPromises, shallowMount } from '@vue/test-utils';
 import { createPinia, setActivePinia } from 'pinia';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
@@ -24,7 +25,7 @@ describe('RecruitmentManagement', () => {
   });
 
   test('Should mount', () => {
-    const wrapper = mount(RecruitmentManagement);
+    const wrapper = shallowMount(RecruitmentManagement);
     expect(wrapper).toBeDefined();
   });
 
@@ -33,7 +34,7 @@ describe('RecruitmentManagement', () => {
     const mockResponse = [{ id: '1', name: VacancyStatusText.Default, order: 1, companyId: '123', vacancyId: '456' }];
     vi.mocked(apiService.fetchCandidatureStatuses).mockResolvedValueOnce(mockResponse);
 
-    const wrapper = mount(RecruitmentManagement);
+    const wrapper = shallowMount(RecruitmentManagement);
 
     await wrapper.vm.$nextTick();
 
@@ -45,46 +46,59 @@ describe('RecruitmentManagement', () => {
     const mockError = new Error('Network Error');
     vi.mocked(apiService.fetchCandidatureStatuses).mockRejectedValueOnce(mockError);
 
-    const wrapper = mount(RecruitmentManagement);
+    const wrapper = shallowMount(RecruitmentManagement);
 
     await wrapper.vm.$nextTick();
 
     expect(apiService.fetchCandidatureStatuses).toHaveBeenCalled();
   });
 
+  test('Should render LoaderElement while loading', async () => {
+    const recruitmentStore = useRecruitmentStore();
+    recruitmentStore.loading = true;
+
+    const wrapper = shallowMount(RecruitmentManagement);
+
+    const loader = wrapper.findComponent(LoaderElement);
+    expect(loader.exists()).toBe(true);
+  });
+
   test('Should render HeaderTabs component', () => {
-    const wrapper = mount(RecruitmentManagement);
+    const wrapper = shallowMount(RecruitmentManagement);
     const headerTabs = wrapper.findComponent(HeaderTabs);
     expect(headerTabs.exists()).toBe(true);
   });
 
   test('Should render HeaderTools component', () => {
-    const wrapper = mount(RecruitmentManagement);
+    const wrapper = shallowMount(RecruitmentManagement);
     const headerTools = wrapper.findComponent(HeaderTools);
     expect(headerTools.exists()).toBe(true);
   });
 
-  test('Should render VacanciesTab component when Vacancies tab is active', () => {
+  test('Should render VacanciesTab component when Vacancies tab is active', async () => {
     const recruitmentStore = useRecruitmentStore();
     recruitmentStore.vacancyTabs = {
       [RecruitmentTabs.Vacancies]: true,
       [RecruitmentTabs.Candidates]: false,
     };
 
-    const wrapper = mount(RecruitmentManagement);
+    const wrapper = shallowMount(RecruitmentManagement);
     const vacanciesTab = wrapper.findComponent(VacanciesTab);
+    await wrapper.vm.$nextTick();
+    console.log(wrapper.html());
     expect(vacanciesTab.exists()).toBe(true);
   });
 
-  test('Should render CandidatesTab component when Candidates tab is active', () => {
+  test('Should render CandidatesTab component when Candidates tab is active', async () => {
     const recruitmentStore = useRecruitmentStore();
     recruitmentStore.vacancyTabs = {
       [RecruitmentTabs.Vacancies]: false,
       [RecruitmentTabs.Candidates]: true,
     };
 
-    const wrapper = mount(RecruitmentManagement);
+    const wrapper = shallowMount(RecruitmentManagement);
     const candidatesTab = wrapper.findComponent(CandidatesTab);
+    await wrapper.vm.$nextTick();
     expect(candidatesTab.exists()).toBe(true);
   });
 });

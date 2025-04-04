@@ -40,3 +40,8 @@ html {
   scrollbar-color: #1f2d52 white;
   scrollbar-width: thin;
 }
+
+.dragging {
+  cursor: grabbing;
+  user-select: none;
+}

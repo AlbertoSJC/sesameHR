@@ -2,7 +2,7 @@ import VacanciesTab from '@components/recruitment/vacancies/VacanciesTab.vue';
 import VacancyStatusCard from '@components/recruitment/vacancies/VacancyStatusCard.vue';
 import { useRecruitmentStore } from '@stores/recruitment';
 import { mockVacancyStatuses } from '@tests/mocks/vacancyMocks';
-import { mount } from '@vue/test-utils';
+import { mount, shallowMount } from '@vue/test-utils';
 import { createPinia, setActivePinia } from 'pinia';
 
 describe('VacanciesTab', () => {
@@ -15,7 +15,7 @@ describe('VacanciesTab', () => {
   });
 
   test('Should mount correctly', () => {
-    const wrapper = mount(VacanciesTab);
+    const wrapper = shallowMount(VacanciesTab);
 
     expect(wrapper.exists()).toBe(true);
   });
