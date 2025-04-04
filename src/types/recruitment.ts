@@ -8,12 +8,12 @@ export interface InputProps {
   id?: string;
 }
 
-export enum RecruitmentTabs {
-  Vacancies = 'Vacantes',
-  Candidates = 'Candidatos',
+export interface StatusCardModel {
+  imgSrc: string;
+  color: string;
 }
 
-export const vacancyStatusCardOutput = {
+export const vacancyStatusCardOutput: Record<VacancyStatusText, StatusCardModel> = {
   [VacancyStatusText.New]: { imgSrc: 'new', color: '#22C55E' },
   [VacancyStatusText.InProgress]: { imgSrc: 'in-progress', color: '#14B8A6' },
   [VacancyStatusText.Offer]: { imgSrc: 'offer', color: '#e65600' },
@@ -21,3 +21,8 @@ export const vacancyStatusCardOutput = {
   [VacancyStatusText.Discarded]: { imgSrc: 'discarded', color: '#ED6F6F' },
   [VacancyStatusText.Default]: { imgSrc: 'default', color: '#808080' },
 };
+
+export enum RecruitmentTabs {
+  Vacancies = 'Vacantes',
+  Candidates = 'Candidatos',
+}

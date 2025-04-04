@@ -11,15 +11,7 @@ import VacanciesTab from './vacancies/VacanciesTab.vue';
 const recruitmentStore = useRecruitmentStore();
 
 onMounted(async () => {
-  await apiService
-    .fetchCandidatureStatuses()
-    .then((response) => {
-      recruitmentStore.vacancyStatuses = response;
-      console.log(recruitmentStore.vacancyStatuses);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  await recruitmentStore.fetchVacancyStatuses();
 });
 </script>
 
