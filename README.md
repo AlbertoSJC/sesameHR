@@ -10,7 +10,7 @@ command to start the application:
 
 npm i
 
-npm run dev
+npm start
 
 launch tests with
 

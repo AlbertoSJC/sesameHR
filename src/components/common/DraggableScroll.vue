@@ -15,9 +15,12 @@ let scrollLeft = 0;
 
 onMounted(() => {
   const scrollable = document.getElementById(`${id}`) as HTMLElement;
+
   if (!scrollable) return;
+
   const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.code === 'Space') {
+    const target = e.target as HTMLElement;
+    if (e.code === 'Space' && !['INPUT', 'TEXTAREA'].includes(target.tagName) && !target.isContentEditable) {
       e.preventDefault();
       isSpacePressed = true;
     }

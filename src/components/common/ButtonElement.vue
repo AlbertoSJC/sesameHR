@@ -9,7 +9,7 @@ defineProps<ButtonProps>();
 </script>
 
 <template>
-  <button :class="[disabled ? '!bg-[#535353] border-[#535353] !text-black pointer-events-none' : 'cursor-pointer border-[#1F2D52] text-white bg-[#1F2D52]', classes]">
+  <button :class="[disabled ? '!bg-[#535353] border-[#b5b5b5] !text-white pointer-events-none' : 'cursor-pointer border-[#1F2D52] text-white bg-[#1F2D52]', classes]">
     {{ text }}
   </button>
 </template>

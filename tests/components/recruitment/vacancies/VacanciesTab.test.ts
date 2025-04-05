@@ -1,5 +1,6 @@
 import VacanciesTab from '@components/recruitment/vacancies/VacanciesTab.vue';
 import VacancyStatusCard from '@components/recruitment/vacancies/VacancyStatusCard.vue';
+import { AllVacancyStatus } from '@domain/AllVacancyStatus';
 import { useRecruitmentStore } from '@stores/recruitment';
 import { mockVacancyStatuses } from '@tests/mocks/vacancyMocks';
 import { mount, shallowMount } from '@vue/test-utils';
@@ -11,7 +12,7 @@ describe('VacanciesTab', () => {
   beforeEach(() => {
     setActivePinia(createPinia());
     recruitmentStore = useRecruitmentStore();
-    recruitmentStore.vacancyStatuses = mockVacancyStatuses;
+    recruitmentStore.vacancyStatusList = new AllVacancyStatus(mockVacancyStatuses);
   });
 
   test('Should mount correctly', () => {

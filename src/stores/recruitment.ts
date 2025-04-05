@@ -1,35 +1,122 @@
-import type { VacancyStatus } from '@domain/VacancyStatus';
+import { AllCandidates } from '@domain/AllCandidates';
+import { AllVacancyStatus } from '@domain/AllVacancyStatus';
+import { Candidate } from '@domain/Candidate';
+import { VacancyStatus } from '@domain/VacancyStatus';
 import apiService from '@services/apiService';
-import { RecruitmentTabs } from '@typesOrigin/recruitment.js';
+import { ModalFormSuccess, RecruitmentTabs, type SchemaCandidateErrors } from '@typesOrigin/recruitment.js';
 import { defineStore } from 'pinia';
+import { ENV_VARIABLES } from 'src/env';
 import { ref } from 'vue';
+import { candidateSchema } from './validation/SchemaCandidateValidation';
 
 export const useRecruitmentStore = defineStore('recruitment', () => {
-  const loading = ref<boolean>(false);
-  const vacancyStatuses = ref<VacancyStatus[] | null>(null);
+  const loading = ref<boolean>(true);
+  const formStatus = ref<ModalFormSuccess | null>(null);
   const recruitmentFilterInput = ref<string>('');
+  const vacancyStatusList = ref<AllVacancyStatus>(new AllVacancyStatus());
+  const candidateList = ref<AllCandidates>(new AllCandidates());
+  const candidateToUpload = ref<Candidate>(new Candidate());
+  const errors = ref<Partial<SchemaCandidateErrors> | null>(null);
   const vacancyTabs = ref<Record<RecruitmentTabs, boolean>>({
     [RecruitmentTabs.Vacancies]: true,
     [RecruitmentTabs.Candidates]: false,
   });
 
+  const createCandidateToUpload = () => {
+    candidateToUpload.value = new Candidate();
+    candidateToUpload.value.statusId = vacancyStatusList.value.statuses.length > 0 ? vacancyStatusList.value.statuses[0].id : '';
+    candidateToUpload.value.vacancyId = ENV_VARIABLES.PUBLIC_VACANCY_ID;
+  };
+
+  const validateCandidate = () => {
+    const result = candidateSchema.safeParse(candidateToUpload.value);
+
+    if (!result.success) {
+      errors.value = result.error.flatten().fieldErrors;
+    } else {
+      errors.value = null;
+    }
+  };
+
+  const clearError = (key: string) => {
+    if (errors.value?.[key as keyof SchemaCandidateErrors]) {
+      delete errors.value?.[key as keyof SchemaCandidateErrors];
+    }
+
+    if (errors.value && Object.keys(errors.value).length === 0) {
+      errors.value = null;
+    }
+  };
+
   const fetchVacancyStatuses = async () => {
     await apiService
       .fetchCandidatureStatuses()
       .then((response) => {
-        vacancyStatuses.value = response;
+        response.map((status) => {
+          vacancyStatusList.value.addStatus(new VacancyStatus(status));
+        });
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
+  const fetchCandidates = async () => {
+    await apiService
+      .fetchCandidates()
+      .then((response) => {
+        candidateList.value = new AllCandidates(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const saveCandidate = async () => {
+    validateCandidate();
+    if (!errors.value) {
+      await apiService
+        .saveCandidate(candidateToUpload.value.toApiJson())
+        .then((response) => {
+          candidateList.value.addCandidate(new Candidate(response));
+          candidateToUpload.value = new Candidate();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
+  const editCandidate = async () => {
+    validateCandidate();
+    if (!errors.value) {
+      await apiService
+        .editCandidate(candidateToUpload.value.toApiJson())
+        .then((response) => {
+          candidateList.value.editCandidate(new Candidate(response));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
   return {
+    errors,
     loading,
-    vacancyStatuses,
+    formStatus,
+    vacancyStatusList,
     vacancyTabs,
     recruitmentFilterInput,
+    candidateToUpload,
+    candidateList,
 
     fetchVacancyStatuses,
+    fetchCandidates,
+    saveCandidate,
+    editCandidate,
+    createCandidateToUpload,
+    validateCandidate,
+    clearError,
   };
 });

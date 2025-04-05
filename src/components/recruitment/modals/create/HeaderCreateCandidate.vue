@@ -1,13 +1,30 @@
 <script setup lang="ts">
 import ButtonElement from '@components/common/ButtonElement.vue';
+import { useRecruitmentStore } from '@stores/recruitment';
+import { ModalFormSuccess } from '@typesOrigin/recruitment';
+import { computed, ref } from 'vue';
+
+const recruitmentStore = useRecruitmentStore();
+
+const buttonFormClasses = computed(() => {
+  if (recruitmentStore.formStatus === ModalFormSuccess.Success) return 'bg-[#137019] pointer-none font-bold';
+  if (recruitmentStore.formStatus === ModalFormSuccess.Failure) return 'bg-[#801111] pointer-none font-bold';
+  return '';
+});
+
+const buttonFormText = computed(() => {
+  if (recruitmentStore.formStatus === ModalFormSuccess.Success) return 'Guardado!';
+  if (recruitmentStore.formStatus === ModalFormSuccess.Failure) return 'Error!';
+  return 'Guardar';
+});
 </script>
 
 <template>
   <div class="flex flex-row justify-between items-end pb-2 border-b-2 border-[#F1F5F9]">
     <div class="flex flex-row gap-3 items-start">
       <img src="src/images/new-candidate.svg" alt="New candidate" class="h-[25px]" />
-      <h5 class="text-2xl font-bold text-[#1f2d52]">Add new candidate</h5>
+      <h5 class="text-2xl font-bold text-[#1f2d52]">Añadir nuevo candidato</h5>
     </div>
-    <ButtonElement text="Save Candidate" />
+    <ButtonElement :text="buttonFormText" @click="recruitmentStore.saveCandidate()" :disabled="recruitmentStore.errors !== null" :classes="buttonFormClasses" />
   </div>
 </template>

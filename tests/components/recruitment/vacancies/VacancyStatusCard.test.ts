@@ -12,7 +12,7 @@ describe('VacancyStatusCard', () => {
   beforeEach(() => {
     setActivePinia(createPinia());
     recruitmentStore = useRecruitmentStore();
-    recruitmentStore.vacancyStatuses = mockVacancyStatuses;
+    recruitmentStore.vacancyStatusList = mockVacancyStatuses;
   });
 
   test('Should mount correctly', () => {

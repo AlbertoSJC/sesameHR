@@ -14,6 +14,18 @@ html {
   @apply h-full overflow-auto;
 }
 
+input {
+  appearance: auto;
+  -moz-appearance: textfield;
+  @apply transition duration-300 ease-in-out focus:border-[#6C63FF] active:border-[#6C63FF] focus-visible:border-[#6C63FF];
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .shadow-inset-lg {
   box-shadow: 5px 4px 9px 3px #2f299908;
 }

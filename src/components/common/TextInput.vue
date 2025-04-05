@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import type { InputProps } from '@typesOrigin/recruitment';
+import type { ExtendedInputProps } from '@typesOrigin/recruitment';
 
-interface TextInputProps extends InputProps {
+interface TextInputProps extends ExtendedInputProps {
   icon?: string;
+  required?: boolean;
+  errors?: string[];
+  onInputCallback?: () => void;
 }
 
 defineProps<TextInputProps>();
@@ -11,33 +14,25 @@ const modelValue = defineModel<string>();
 </script>
 
 <template>
-  <div class="flex flex-row gap-2 items-center">
-    <label v-if="label" :for="id" class="font-semibold">{{ label }}</label>
-    <div class="relative">
-      <img v-if="icon" :src="icon" class="absolute top-[20px] left-[6px]" />
+  <div :class="[{ 'w-full items-start': widthFull }, 'flex flex-col items-center']">
+    <label v-if="label" :for="id" class="font-semibold text-[#1F2D52]">{{ label }}</label>
+    <div :class="[{ 'w-full items-start': widthFull }, 'relative']">
+      <img v-if="icon" :src="icon" class="absolute top-[15px] left-[6px]" />
       <input
         v-model="modelValue"
-        :class="['my-2.5 border border-[#E2E8F0] bg-[#F8FAFC] text-[#94A3B8] p-1.25 rounded-xl outline-0', classes, { 'pl-6': icon, 'text-black': modelValue && modelValue.length > 0 }]"
+        :class="[
+          'my-1 border border-[#E2E8F0] bg-[#F8FAFC] text-[#94A3B8] p-1.25 rounded-xl outline-0',
+          classes,
+          { 'pl-6': icon, 'text-black': modelValue && modelValue.length > 0, 'w-full': widthFull },
+        ]"
         type="text"
         :id="id"
         :placeholder="placeholder"
+        :required="required"
+        @input="onInputCallback"
       />
+      <span v-if="errors && errors[0]" class="error block w-full font-semibold text-xs text-[#770000]">{{ errors[0] }}</span>
+      <span v-else class="block w-full h-[16px]"></span>
     </div>
   </div>
 </template>
-
-<style scoped>
-@reference "tailwindcss";
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type='text'] {
-  appearance: auto;
-  -moz-appearance: textfield;
-  @apply transition duration-300 ease-in-out focus:border-[#6C63FF] active:border-[#6C63FF] focus-visible:border-[#6C63FF];
-}
-</style>

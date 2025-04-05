@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "start": "astro dev --host",
+    "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
@@ -25,12 +25,14 @@
     "@tailwindcss/vite": "^4.1.1",
     "@vitest/ui": "^3.1.1",
     "@vueuse/core": "^13.0.0",
+    "animejs": "^4.0.0",
     "axios": "^1.8.4",
     "pinia": "^3.0.1",
     "vite": "^6.2.5",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.1.1",
-    "vue": "^3.5.13"
+    "vue": "^3.5.13",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",

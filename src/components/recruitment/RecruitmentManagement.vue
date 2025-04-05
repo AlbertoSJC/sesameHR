@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import apiService from '@services/apiService';
+import LoaderElement from '@components/common/LoaderElement.vue';
 import { useRecruitmentStore } from '@stores/recruitment';
 import { RecruitmentTabs } from '@typesOrigin/recruitment';
-import { onMounted, ref } from 'vue';
+import { onMounted } from 'vue';
 import CandidatesTab from './candidates/CandidatesTab.vue';
 import HeaderTabs from './HeaderTabs.vue';
 import HeaderTools from './HeaderTools.vue';
 import VacanciesTab from './vacancies/VacanciesTab.vue';
-import LoaderElement from '@components/common/LoaderElement.vue';
 
 const recruitmentStore = useRecruitmentStore();
 

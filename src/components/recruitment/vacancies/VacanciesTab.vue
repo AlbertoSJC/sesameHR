@@ -8,6 +8,6 @@ const recruitmentStore = useRecruitmentStore();
 
 <template>
   <DraggableScroll id="vacancies-container" classes="flex flex-row h-full w-full min-w-0 gap-3 pb-2 overflow-x-auto scroll-container">
-    <VacancyStatusCard v-for="(vacancyStatus, index) in recruitmentStore.vacancyStatuses" :status="vacancyStatus" :key="index" :index="index" />
+    <VacancyStatusCard v-for="(vacancyStatus, index) in recruitmentStore.vacancyStatusList.statuses" :status="vacancyStatus" :key="index" :index="index" />
   </DraggableScroll>
 </template>

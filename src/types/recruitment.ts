@@ -8,6 +8,10 @@ export interface InputProps {
   id?: string;
 }
 
+export interface ExtendedInputProps extends InputProps {
+  widthFull?: boolean;
+}
+
 export interface StatusCardModel {
   imgSrc: string;
   color: string;
@@ -25,4 +29,16 @@ export const vacancyStatusCardOutput: Record<VacancyStatusText, StatusCardModel>
 export enum RecruitmentTabs {
   Vacancies = 'Vacantes',
   Candidates = 'Candidatos',
+}
+
+export interface SchemaCandidateErrors {
+  firstName?: string[];
+  lastName?: string[];
+  email?: string[];
+  linkedinURL?: string[];
+}
+
+export enum ModalFormSuccess {
+  Success = 'success',
+  Failure = 'failure',
 }

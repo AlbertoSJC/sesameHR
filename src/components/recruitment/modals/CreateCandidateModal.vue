@@ -1,13 +1,19 @@
 <script setup lang="ts">
 import ModalContainer from '@components/common/ModalContainer.vue';
-import { ModalIds, useModalsStore } from '@stores/modals';
+import { ModalIds } from '@stores/modals';
+import { useRecruitmentStore } from '@stores/recruitment';
+import { onMounted } from 'vue';
+import CandidateForm from './CandidateForm.vue';
 import HeaderCreateCandidate from './create/HeaderCreateCandidate.vue';
 
-const modalsStore = useModalsStore();
+const recruitmentStore = useRecruitmentStore();
+
+onMounted(() => recruitmentStore.createCandidateToUpload());
 </script>
 
 <template>
-  <ModalContainer :modalId="ModalIds.CreateCandidate">
+  <ModalContainer classes="!w-[40%]" :modalId="ModalIds.CreateCandidate">
     <HeaderCreateCandidate />
+    <CandidateForm />
   </ModalContainer>
 </template>

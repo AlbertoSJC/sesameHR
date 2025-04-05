@@ -34,4 +34,66 @@ describe('Candidate', () => {
     expect(candidate.vacancyId).toBe(mockPartialCandidateData.vacancyId);
     expect(candidate.statusId).toBe(mockPartialCandidateData.statusId);
   });
+
+  test('should convert Candidate instance to API JSON format', () => {
+    const candidate = new Candidate({
+      id: '1',
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'john.doe@example.com',
+      phone: 123456789,
+      linkedinURL: 'https://linkedin.com/in/johndoe',
+      desiredSalary: 50000,
+      startWorkDate: '2025-04-05',
+      web: 'https://johndoe.com',
+      location: 'USA',
+      vacancyId: 'vacancy-123',
+      statusId: 'status-456',
+    });
+
+    const apiJson = candidate.toApiJson();
+
+    expect(apiJson).toEqual({
+      id: '1',
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'john.doe@example.com',
+      phone: '123456789',
+      linkedinURL: 'https://linkedin.com/in/johndoe',
+      desiredSalary: '50000',
+      startWorkDate: '2025-04-05',
+      web: 'https://johndoe.com',
+      location: 'USA',
+      vacancyId: 'vacancy-123',
+      statusId: 'status-456',
+    });
+  });
+
+  test('should handle undefined optional properties in toApiJson', () => {
+    const candidate = new Candidate({
+      id: '2',
+      firstName: 'Jane',
+      lastName: 'Smith',
+      email: 'jane.smith@example.com',
+      vacancyId: 'vacancy-789',
+      statusId: 'status-101',
+    });
+
+    const apiJson = candidate.toApiJson();
+
+    expect(apiJson).toEqual({
+      id: '2',
+      firstName: 'Jane',
+      lastName: 'Smith',
+      email: 'jane.smith@example.com',
+      phone: 'undefined',
+      linkedinURL: undefined,
+      desiredSalary: 'undefined',
+      startWorkDate: undefined,
+      web: undefined,
+      location: undefined,
+      vacancyId: 'vacancy-789',
+      statusId: 'status-101',
+    });
+  });
 });
