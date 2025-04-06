@@ -42,7 +42,7 @@ const handleDragEnd = () => {
     </div>
     <span class="added-by text-xs text-[#64748B]">Añadido por ATS</span>
     <div class="flex flex-row gap-1 items-center">
-      <img :src="`src/images/icon-clock.svg`" class="h-[16px] w-[16px]" />
+      <img src="src/images/icon-clock.svg" class="h-[16px] w-[16px]" />
       <span class="created-at-text text-xs text-primary-grey">{{ formatDate(candidate.createdAt as string) }}</span>
     </div>
   </div>

@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import { shallowMount } from '@vue/test-utils';
+import { mount, shallowMount } from '@vue/test-utils';
 import CompanySidebar from '@components/sidebar/CompanySidebar.vue';
 
 describe('CompanySidebar', () => {
@@ -33,5 +33,29 @@ describe('CompanySidebar', () => {
     expect(childDivs[1].classes()).toContain('h-full');
     expect(childDivs[1].classes()).toContain('w-[80%]');
     expect(childDivs[1].classes()).toContain('bg-white');
+  });
+
+  test('toggles triggerSecondMenu when the second menu is clicked', async () => {
+    const wrapper = mount(CompanySidebar);
+    const secondMenu = wrapper.find('.second-menu-trigger');
+    expect((wrapper.vm as any).triggerSecondMenu).toBe(false);
+
+    await secondMenu.trigger('click');
+    expect((wrapper.vm as any).triggerSecondMenu).toBe(true);
+
+    await secondMenu.trigger('click');
+    expect((wrapper.vm as any).triggerSecondMenu).toBe(false);
+  });
+
+  test('applies correct classes based on triggerFirstMenu and triggerSecondMenu states', async () => {
+    const wrapper = mount(CompanySidebar);
+
+    const firstMenu = wrapper.find('.first-menu-trigger');
+    await firstMenu.trigger('click');
+    expect(wrapper.find('div.max-h-[16px]').exists()).toBe(false);
+
+    const secondMenu = wrapper.find('.second-menu-trigger');
+    await secondMenu.trigger('click');
+    expect(wrapper.find('div.max-h-[35px]').exists()).toBe(false);
   });
 });
