@@ -37,7 +37,7 @@ describe('HeaderEditCandidate', () => {
     const button = wrapper.findComponent(ButtonElement);
 
     expect(button.exists()).toBe(true);
-    expect(button.props('text')).toBe('Guardar');
+    expect(button.props('text')).toBe('Editar');
     expect(button.props('disabled')).toBe(false);
   });
 

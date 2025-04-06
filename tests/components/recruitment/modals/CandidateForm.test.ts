@@ -108,12 +108,12 @@ describe('CandidateForm', () => {
     expect((phoneInput.element as HTMLInputElement).value).toBe('123456789');
   });
 
-  test('Should update linkedinURL in the store and input element', async () => {
+  test('Should update linkedInURL in the store and input element', async () => {
     const wrapper = mount(CandidateForm);
     const linkedinInput = wrapper.find('#linkedin-candidate');
 
     await linkedinInput.setValue('https://www.linkedin.com/in/johndoe');
-    expect(recruitmentStore.candidateToUpload.linkedinURL).toBe('https://www.linkedin.com/in/johndoe');
+    expect(recruitmentStore.candidateToUpload.linkedInURL).toBe('https://www.linkedin.com/in/johndoe');
     expect((linkedinInput.element as HTMLInputElement).value).toBe('https://www.linkedin.com/in/johndoe');
   });
 

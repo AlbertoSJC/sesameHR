@@ -2,11 +2,11 @@ export interface CandidateInformation {
   id?: string;
   firstName: string;
   lastName: string;
-  vacancyId: string;
-  statusId: string;
+  vacancyId?: string;
+  statusId?: string;
   email: string;
   phone?: string | number;
-  linkedinURL?: string;
+  linkedInURL?: string;
   desiredSalary?: string | number;
   startWorkDate?: string;
   web?: string;
@@ -23,7 +23,7 @@ export class Candidate {
   statusId?: string;
   email?: string;
   phone?: number;
-  linkedinURL?: string;
+  linkedInURL?: string;
   desiredSalary?: number;
   startWorkDate?: string;
   web?: string;
@@ -37,7 +37,7 @@ export class Candidate {
     this.lastName = data?.lastName;
     this.email = data?.email;
     this.phone = !isNaN(data?.phone as number) ? Number(data?.phone) : undefined;
-    this.linkedinURL = data?.linkedinURL;
+    this.linkedInURL = data?.linkedInURL;
     this.desiredSalary = !isNaN(data?.desiredSalary as number) ? Number(data?.desiredSalary) : undefined;
     this.startWorkDate = data?.startWorkDate;
     this.web = data?.web;
@@ -57,7 +57,7 @@ export class Candidate {
       vacancyId: this.vacancyId ?? '',
       statusId: this.statusId ?? '',
       phone: String(this.phone),
-      linkedinURL: this.linkedinURL,
+      linkedInURL: this.linkedInURL,
       desiredSalary: String(this.desiredSalary),
       startWorkDate: this.startWorkDate,
       web: this.web,

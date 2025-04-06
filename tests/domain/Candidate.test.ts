@@ -10,7 +10,7 @@ describe('Candidate', () => {
     expect(candidate.lastName).toBe(mockCandidateData.lastName);
     expect(candidate.email).toBe(mockCandidateData.email);
     expect(candidate.phone).toBe(mockCandidateData.phone);
-    expect(candidate.linkedinURL).toBe(mockCandidateData.linkedinURL);
+    expect(candidate.linkedInURL).toBe(mockCandidateData.linkedInURL);
     expect(candidate.desiredSalary).toBe(mockCandidateData.desiredSalary);
     expect(candidate.startWorkDate).toBe(mockCandidateData.startWorkDate);
     expect(candidate.web).toBe(mockCandidateData.web);
@@ -26,7 +26,7 @@ describe('Candidate', () => {
     expect(candidate.lastName).toBe(mockPartialCandidateData.lastName);
     expect(candidate.email).toBe(mockPartialCandidateData.email);
     expect(candidate.phone).toBeUndefined();
-    expect(candidate.linkedinURL).toBeUndefined();
+    expect(candidate.linkedInURL).toBeUndefined();
     expect(candidate.desiredSalary).toBeUndefined();
     expect(candidate.startWorkDate).toBeUndefined();
     expect(candidate.web).toBeUndefined();
@@ -42,7 +42,7 @@ describe('Candidate', () => {
       lastName: 'Doe',
       email: 'john.doe@example.com',
       phone: 123456789,
-      linkedinURL: 'https://linkedin.com/in/johndoe',
+      linkedInURL: 'https://linkedin.com/in/johndoe',
       desiredSalary: 50000,
       startWorkDate: '2025-04-05',
       web: 'https://johndoe.com',
@@ -59,7 +59,7 @@ describe('Candidate', () => {
       lastName: 'Doe',
       email: 'john.doe@example.com',
       phone: '123456789',
-      linkedinURL: 'https://linkedin.com/in/johndoe',
+      linkedInURL: 'https://linkedin.com/in/johndoe',
       desiredSalary: '50000',
       startWorkDate: '2025-04-05',
       web: 'https://johndoe.com',
@@ -87,7 +87,7 @@ describe('Candidate', () => {
       lastName: 'Smith',
       email: 'jane.smith@example.com',
       phone: 'undefined',
-      linkedinURL: undefined,
+      linkedInURL: undefined,
       desiredSalary: 'undefined',
       startWorkDate: undefined,
       web: undefined,

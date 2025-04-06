@@ -6,7 +6,7 @@ export const mockCandidateData: CandidateInformation = {
   lastName: 'Doe',
   email: 'john.doe@example.com',
   phone: 123456789,
-  linkedinURL: 'https://linkedin.com/in/johndoe',
+  linkedInURL: 'https://linkedin.com/in/johndoe',
   desiredSalary: 50000,
   startWorkDate: '2025-05-01',
   web: 'https://johndoe.com',

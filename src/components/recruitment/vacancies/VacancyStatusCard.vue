@@ -52,7 +52,7 @@ const handleDrop = async () => {
       </div>
     </div>
     <div v-if="status" id="candidate-cards-container" class="flex flex-col h-full w-full min-w-0 gap-3 pb-2 pr-1 overflow-y-auto overflow-x-hidden scroll-container list-card-scroll-container">
-      <CandidateCard v-for="candidate in recruitmentStore.filteredCandidates.filter((candidate) => candidate.statusId === status.id)" :candidate="candidate" :vacancyIndex="index" />
+      <CandidateCard v-for="candidate in recruitmentStore.filteredCandidates.filter((candidate) => candidate.statusId === status.id)" :candidate="candidate" :vacancyIndex="index" :key="index" />
     </div>
   </div>
 </template>

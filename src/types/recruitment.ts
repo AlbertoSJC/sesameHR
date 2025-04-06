@@ -35,7 +35,8 @@ export interface SchemaCandidateErrors {
   firstName?: string[];
   lastName?: string[];
   email?: string[];
-  linkedinURL?: string[];
+  linkedInURL?: string[];
+  web?: string[];
 }
 
 export enum ModalFormSuccess {
