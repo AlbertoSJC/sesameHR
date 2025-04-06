@@ -6,7 +6,7 @@ import apiService from '@services/apiService';
 import { ModalFormSuccess, RecruitmentTabs, type SchemaCandidateErrors } from '@typesOrigin/recruitment.js';
 import { defineStore } from 'pinia';
 import { ENV_VARIABLES } from 'src/env';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { candidateSchema } from './validation/SchemaCandidateValidation';
 
 export const useRecruitmentStore = defineStore('recruitment', () => {
@@ -21,6 +21,12 @@ export const useRecruitmentStore = defineStore('recruitment', () => {
   const vacancyTabs = ref<Record<RecruitmentTabs, boolean>>({
     [RecruitmentTabs.Vacancies]: true,
     [RecruitmentTabs.Candidates]: false,
+  });
+  const filteredCandidates = computed(() => {
+    const filter = recruitmentFilterInput.value.toLowerCase();
+    if (!filter) return candidateList.value.candidates;
+
+    return candidateList.value.candidates.filter((candidate) => candidate.firstName?.toLowerCase().includes(filter) || candidate.lastName?.toLowerCase().includes(filter));
   });
 
   const createCandidateToUpload = () => {
@@ -117,6 +123,7 @@ export const useRecruitmentStore = defineStore('recruitment', () => {
     candidateToUpload,
     candidateList,
     candidateBeingDragged,
+    filteredCandidates,
 
     fetchVacancyStatuses,
     fetchCandidates,
