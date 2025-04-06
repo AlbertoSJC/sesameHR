@@ -9,7 +9,14 @@ defineProps<ButtonProps>();
 </script>
 
 <template>
-  <button :class="[disabled ? '!bg-[#535353] border-[#b5b5b5] !text-white pointer-events-none' : 'cursor-pointer border-[#1F2D52] text-white bg-[#1F2D52]', classes]">
+  <button
+    :class="[
+      disabled
+        ? '!bg-[#535353] border-[#b5b5b5] !text-white pointer-events-none'
+        : 'cursor-pointer border-secondary-blue text-white bg-secondary-blue hover:text-secondary-color hover:border-secondary-color',
+      classes,
+    ]"
+  >
     {{ text }}
   </button>
 </template>
@@ -18,6 +25,6 @@ defineProps<ButtonProps>();
 @reference "tailwindcss";
 
 button {
-  @apply w-fit py-1 px-3 rounded-xl border-2 transition duration-300 ease-in-out hover:bg-white hover:text-[#6C63FF] hover:border-[#6C63FF];
+  @apply w-fit py-1 px-3 rounded-xl border-2 transition duration-300 ease-in-out hover:bg-white;
 }
 </style>

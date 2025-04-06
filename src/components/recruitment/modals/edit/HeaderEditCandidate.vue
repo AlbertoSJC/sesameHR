@@ -8,8 +8,8 @@ import { computed } from 'vue';
 const recruitmentStore = useRecruitmentStore();
 const modalsStore = useModalsStore();
 
-const saveCandidate = async () => {
-  await recruitmentStore.saveCandidate();
+const editCandidate = async () => {
+  await recruitmentStore.editCandidate();
   setTimeout(() => {
     if (recruitmentStore.formStatus === ModalFormSuccess.Success) {
       modalsStore.toggleModal(ModalIds.CreateCandidate);
@@ -25,7 +25,7 @@ const buttonFormClasses = computed(() => {
 });
 
 const buttonFormText = computed(() => {
-  if (recruitmentStore.formStatus === ModalFormSuccess.Success) return 'Guardado!';
+  if (recruitmentStore.formStatus === ModalFormSuccess.Success) return 'Editado!';
   if (recruitmentStore.formStatus === ModalFormSuccess.Failure) return 'Error!';
   return 'Guardar';
 });
@@ -34,9 +34,9 @@ const buttonFormText = computed(() => {
 <template>
   <div class="flex flex-row justify-between items-end pb-2 border-b-2 border-[#F1F5F9]">
     <div class="flex flex-row gap-3 items-start">
-      <img src="src/images/new-candidate.svg" alt="New candidate" class="h-[25px]" />
-      <h5 class="text-2xl font-bold text-secondary-blue">Añadir nuevo candidato</h5>
+      <img src="src/images/new-candidate.svg" alt="Edit candidate" class="h-[25px]" />
+      <h5 class="text-2xl font-bold text-secondary-blue">Editar candidato</h5>
     </div>
-    <ButtonElement :text="buttonFormText" @click="saveCandidate" :disabled="recruitmentStore.errors !== null" :classes="buttonFormClasses" />
+    <ButtonElement :text="buttonFormText" @click="editCandidate" :disabled="recruitmentStore.errors !== null" :classes="buttonFormClasses" />
   </div>
 </template>

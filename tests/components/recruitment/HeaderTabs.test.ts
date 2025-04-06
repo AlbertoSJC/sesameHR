@@ -27,7 +27,7 @@ describe('HeaderTabs', () => {
       const tabKey = Object.keys(recruitmentStore.vacancyTabs)[index];
       const isActive = recruitmentStore.vacancyTabs[tabKey as RecruitmentTabs];
       expect(tab.text()).toBe(tabKey);
-      expect(tab.classes()).toContain(isActive ? 'text-[#6C63FF]' : 'text-gray-500');
+      expect(tab.classes()).toContain(isActive ? 'text-secondary-color' : 'text-gray-500');
     });
   });
 

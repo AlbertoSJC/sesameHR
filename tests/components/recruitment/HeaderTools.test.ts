@@ -1,7 +1,8 @@
 import ButtonElement from '@components/common/ButtonElement.vue';
 import TextInput from '@components/common/TextInput.vue';
 import HeaderTools from '@components/recruitment/HeaderTools.vue';
-import CreateCandidateModal from '@components/recruitment/modals/CreateCandidateModal.vue';
+import CreateCandidateModal from '@components/recruitment/modals/create/CreateCandidateModal.vue';
+import EditCandidateModal from '@components/recruitment/modals/edit/EditCandidateModal.vue';
 import { AllVacancyStatus } from '@domain/AllVacancyStatus';
 import { ModalIds, useModalsStore } from '@stores/modals';
 import { useRecruitmentStore } from '@stores/recruitment';
@@ -67,6 +68,13 @@ describe('HeaderTools', () => {
   test('Should render CreateCandidateModal component', () => {
     const wrapper = mount(HeaderTools);
     const modal = wrapper.findComponent(CreateCandidateModal);
+
+    expect(modal.exists()).toBe(true);
+  });
+
+  test('Should render EdiCandidateModal component', () => {
+    const wrapper = mount(HeaderTools);
+    const modal = wrapper.findComponent(EditCandidateModal);
 
     expect(modal.exists()).toBe(true);
   });

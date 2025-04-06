@@ -37,7 +37,7 @@ describe('RecruitmentContainer', () => {
     expect(heading.text()).toBe('Reclutamiento');
     expect(heading.classes()).toContain('text-5xl');
     expect(heading.classes()).toContain('font-bold');
-    expect(heading.classes()).toContain('text-[#1f2d52]');
+    expect(heading.classes()).toContain('text-secondary-blue');
   });
 
   test('Should render the image with correct attributes and classes', () => {

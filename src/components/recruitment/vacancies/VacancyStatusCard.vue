@@ -3,6 +3,7 @@ import { VacancyStatusText, type VacancyStatus } from '@domain/VacancyStatus';
 import { useRecruitmentStore } from '@stores/recruitment';
 import { vacancyStatusCardOutput } from '@typesOrigin/recruitment';
 import { computed } from 'vue';
+import CandidateCard from '../candidates/CandidateCard.vue';
 
 interface VacancyStatusCardProps {
   status?: VacancyStatus | null;
@@ -17,7 +18,7 @@ const getCurrentStatus = computed(() => vacancyStatusCardOutput[status?.name ?? 
 </script>
 
 <template>
-  <div :class="['flex flex-col h-full w-full min-w-[296px] p-4 border-1 border-[#E2E8F0] rounded-xl', index % 2 !== 0 ? 'bg-[#F8FAFC]' : 'bg-white']">
+  <div :class="['flex flex-col h-full w-full min-w-[296px] p-4 gap-4 border-1 border-primary-white rounded-xl', index % 2 !== 0 ? 'bg-secondary-white' : 'bg-white']">
     <div class="flex flex-col gap-3">
       <hr
         :class="[`h-[4px] border-0 rounded-4xl`]"
@@ -28,9 +29,11 @@ const getCurrentStatus = computed(() => vacancyStatusCardOutput[status?.name ?? 
       />
       <div class="flex flex-row gap-1">
         <img :src="`src/images/status/${getCurrentStatus.imgSrc}.svg`" class="max-h-[24px] max-w-[24px]" />
-        <span class="text-[#1F2D52] font-bold">{{ status?.name ?? 'Recruitment' }}</span>
+        <span class="text-secondary-blue font-bold">{{ status?.name ?? 'Recruitment' }}</span>
       </div>
     </div>
-    <div></div>
+    <div v-if="status" id="candidate-cards-container" class="flex flex-col h-full w-full min-w-0 gap-3 pb-2 pr-1 overflow-y-auto overflow-x-hidden scroll-container list-card-scroll-container">
+      <CandidateCard v-for="candidate in recruitmentStore.candidateList.getCandidatesByStatusId(status.id)" :candidate="candidate" :vacancyIndex="index" />
+    </div>
   </div>
 </template>

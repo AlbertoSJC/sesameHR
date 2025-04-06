@@ -61,7 +61,7 @@ const recruitmentStore = useRecruitmentStore();
       <TextInput label="Localización" v-model="recruitmentStore.candidateToUpload.location" placeholder="España" :width-full="true" id="location-candidate" />
     </div>
     <div class="flex flex-row justify-center items-start gap-4">
-      <DateInput label="Primera fecha de entrada" v-model="recruitmentStore.candidateToUpload.startWorkDate" id="web-candidate" />
+      <DateInput label="Posible fecha de entrada" v-model="recruitmentStore.candidateToUpload.startWorkDate" id="web-candidate" />
     </div>
   </div>
 </template>

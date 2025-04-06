@@ -7,6 +7,16 @@ export class AllCandidates {
     this.candidates = data ? data.map((candidate) => new Candidate(candidate)) : [];
   }
 
+  getCandidatesByStatusId(statusId: string): Candidate[] {
+    this.candidates.sort((a, b) => {
+      const dateA = new Date(a.updatedAt as string).getTime();
+      const dateB = new Date(b.updatedAt as string).getTime();
+      return dateB - dateA;
+    });
+
+    return this.candidates.filter((candidate) => candidate.statusId === statusId);
+  }
+
   findCandidateById(id: string): Candidate | void {
     return this.candidates.find((candidate) => candidate.id === id);
   }

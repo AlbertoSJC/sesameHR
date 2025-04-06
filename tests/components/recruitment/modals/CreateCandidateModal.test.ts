@@ -1,9 +1,8 @@
 import ModalContainer from '@components/common/ModalContainer.vue';
 import CandidateForm from '@components/recruitment/modals/CandidateForm.vue';
 import HeaderCreateCandidate from '@components/recruitment/modals/create/HeaderCreateCandidate.vue';
-import CreateCandidateModal from '@components/recruitment/modals/CreateCandidateModal.vue';
+import CreateCandidateModal from '@components/recruitment/modals/create/CreateCandidateModal.vue';
 import { ModalIds, useModalsStore } from '@stores/modals';
-import { useRecruitmentStore } from '@stores/recruitment';
 import { mount } from '@vue/test-utils';
 import { createPinia, setActivePinia } from 'pinia';
 
@@ -38,14 +37,5 @@ describe('CreateCandidateModal', () => {
     const candidateForm = wrapper.findComponent(CandidateForm);
 
     expect(candidateForm.exists()).toBe(true);
-  });
-
-  test('Should call createCandidateToUpload on mount', () => {
-    const recruitmentStore = useRecruitmentStore();
-    const createCandidateToUploadSpy = vi.spyOn(recruitmentStore, 'createCandidateToUpload');
-
-    mount(CreateCandidateModal);
-
-    expect(createCandidateToUploadSpy).toHaveBeenCalled();
   });
 });

@@ -9,7 +9,7 @@ const { text = 'Loading' } = defineProps<PropsModel>();
 <template>
   <div class="w-full h-full flex flex-nowrap flex-col items-center justify-center gap-6">
     <div class="lds-hourglass"></div>
-    <span class="text-lg font-semibold text-center text-[#1f2d52]">{{ text }}</span>
+    <span class="text-lg font-semibold text-center text-secondary-blue">{{ text }}</span>
   </div>
 </template>
 

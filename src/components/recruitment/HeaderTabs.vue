@@ -16,11 +16,11 @@ const handleTabClick = (tab: RecruitmentTabs) => {
     <span
       v-for="(isActive, tab) in recruitmentStore.vacancyTabs"
       :key="tab"
-      :class="['cursor-pointer pt-1 pb-2', isActive ? 'text-[#6C63FF] font-bold' : 'text-gray-500']"
+      :class="['cursor-pointer pt-1 pb-2', isActive ? 'text-secondary-color font-bold' : 'text-gray-500']"
       @click="handleTabClick(tab)"
     >
       {{ tab }}
-      <hr class="relative top-[10px] text-[#6C63FF] bg-[#6C63FF] h-[3px] border-0" v-if="isActive" />
+      <hr class="relative top-[10px] text-secondary-color bg-secondary-color h-[3px] border-0" v-if="isActive" />
     </span>
   </div>
 </template>

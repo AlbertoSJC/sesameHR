@@ -5,7 +5,7 @@ import DecorativeSidebar from '@components/sidebar/DecorativeSidebar.vue';
 </script>
 
 <template>
-  <div class="w-full h-full flex flex-row gap-4 bg-[#F8FAFC]">
+  <div class="w-full h-full flex flex-row gap-4 bg-secondary-white">
     <CompanySidebar />
     <RecruitmentContainer />
     <DecorativeSidebar />

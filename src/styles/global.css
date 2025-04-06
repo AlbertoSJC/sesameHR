@@ -4,6 +4,16 @@
   font-family: 'Figtree Variable', sans-serif;
 }
 
+@theme {
+  --color-primary-white: #e2e8f0;
+  --color-secondary-white: #f8fafc;
+  --color-primary-grey: #94a3b8;
+  --color-secondary-color: #6c63ff;
+  --color-secondary-blue: #1f2d52;
+  --shadow-inset-lg: 5px 4px 9px 3px #2f299908;
+  --shadow-outset-lg: 0px 1px 9px 5px #2f299908;
+}
+
 html,
 body,
 .main-layout-container {
@@ -14,10 +24,14 @@ html {
   @apply h-full overflow-auto;
 }
 
+.ellipsis-text {
+  @apply whitespace-nowrap overflow-hidden text-ellipsis;
+}
+
 input {
   appearance: auto;
   -moz-appearance: textfield;
-  @apply transition duration-300 ease-in-out focus:border-[#6C63FF] active:border-[#6C63FF] focus-visible:border-[#6C63FF];
+  @apply transition duration-300 ease-in-out focus:border-secondary-color active:border-secondary-color focus-visible:border-secondary-color;
 }
 
 input::-webkit-outer-spin-button,
@@ -27,25 +41,23 @@ input::-webkit-inner-spin-button {
 }
 
 .shadow-inset-lg {
-  box-shadow: 5px 4px 9px 3px #2f299908;
+  @apply shadow-inset-lg;
 }
 
 .shadow-outset-lg {
-  box-shadow: 0px 1px 9px 5px #2f299908;
+  @apply shadow-outset-lg;
 }
 
 ::-webkit-scrollbar {
-  width: 12px;
+  @apply w-[12px];
 }
 
 ::-webkit-scrollbar-track {
-  background: white;
+  @apply bg-white;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #1f2d52;
-  border-radius: 6px;
-  border: 1px solid white;
+  @apply bg-secondary-blue rounded-[6px] border border-white;
 }
 
 .scroll-container {
@@ -54,6 +66,9 @@ input::-webkit-inner-spin-button {
 }
 
 .dragging {
-  cursor: grabbing;
-  user-select: none;
+  @apply cursor-grabbing select-none;
+}
+
+.list-card-scroll-container {
+  max-height: calc(100dvh - 350px);
 }

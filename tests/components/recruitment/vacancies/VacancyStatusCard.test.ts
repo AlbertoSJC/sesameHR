@@ -1,5 +1,6 @@
 import VacancyStatusCard from '@components/recruitment/vacancies/VacancyStatusCard.vue';
-import { VacancyStatus, VacancyStatusText } from '@domain/VacancyStatus';
+import { AllVacancyStatus } from '@domain/AllVacancyStatus';
+import { VacancyStatusText } from '@domain/VacancyStatus';
 import { useRecruitmentStore } from '@stores/recruitment';
 import { mockVacancyStatuses } from '@tests/mocks/vacancyMocks';
 import { vacancyStatusCardOutput } from '@typesOrigin/recruitment';
@@ -12,26 +13,26 @@ describe('VacancyStatusCard', () => {
   beforeEach(() => {
     setActivePinia(createPinia());
     recruitmentStore = useRecruitmentStore();
-    recruitmentStore.vacancyStatusList = mockVacancyStatuses;
+    recruitmentStore.vacancyStatusList = new AllVacancyStatus(mockVacancyStatuses);
   });
 
   test('Should mount correctly', () => {
-    const wrapper = mount(VacancyStatusCard, { props: { status: null, index: 0 } });
+    const wrapper = mount(VacancyStatusCard, { props: { status: recruitmentStore.vacancyStatusList.statuses[0], index: 0 } });
 
     expect(wrapper).toBeDefined();
   });
 
   test('Should render with correct background color based on index', () => {
     const wrapperEven = mount(VacancyStatusCard, {
-      props: { status: null, index: 0 },
+      props: { status: recruitmentStore.vacancyStatusList.statuses[0], index: 0 },
     });
 
     expect(wrapperEven.classes()).toContain('bg-white');
 
     const wrapperOdd = mount(VacancyStatusCard, {
-      props: { status: null, index: 1 },
+      props: { status: recruitmentStore.vacancyStatusList.statuses[0], index: 1 },
     });
-    expect(wrapperOdd.classes()).toContain('bg-[#F8FAFC]');
+    expect(wrapperOdd.classes()).toContain('bg-secondary-white');
   });
 
   test('Should render with default status when status is null', () => {

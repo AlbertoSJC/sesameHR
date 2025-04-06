@@ -16,10 +16,14 @@ watch(modelValue, (newValue) => {
 
 <template>
   <div :class="[{ 'w-full items-start': widthFull }, 'flex flex-col items-center']">
-    <label v-if="label" :for="id" class="font-semibold text-[#1F2D52]">{{ label }}</label>
+    <label v-if="label" :for="id" class="font-semibold text-secondary-blue">{{ label }}</label>
     <input
       v-model="modelValue"
-      :class="['my-1 border border-[#E2E8F0] bg-[#F8FAFC] text-[#94A3B8] p-1.25 rounded-xl outline-0', classes, { 'text-black': modelValue !== null && modelValue !== undefined, 'w-full': widthFull }]"
+      :class="[
+        'my-1 border border-primary-white bg-secondary-white text-primary-grey p-1.25 rounded-xl outline-0',
+        classes,
+        { 'text-black': modelValue !== null && modelValue !== undefined, 'w-full': widthFull },
+      ]"
       type="number"
       :id="id"
       :placeholder="placeholder"
