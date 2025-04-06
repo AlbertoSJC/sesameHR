@@ -80,9 +80,11 @@ export const useRecruitmentStore = defineStore('recruitment', () => {
         .then((response) => {
           candidateList.value.addCandidate(new Candidate(response));
           candidateToUpload.value = new Candidate();
+          formStatus.value = ModalFormSuccess.Success;
         })
         .catch((error) => {
           console.log(error);
+          formStatus.value = ModalFormSuccess.Failure;
         });
     }
   };
@@ -94,9 +96,11 @@ export const useRecruitmentStore = defineStore('recruitment', () => {
         .editCandidate(candidateToUpload.value.toApiJson())
         .then((response) => {
           candidateList.value.editCandidate(new Candidate(response));
+          formStatus.value = ModalFormSuccess.Success;
         })
         .catch((error) => {
           console.log(error);
+          formStatus.value = ModalFormSuccess.Failure;
         });
     }
   };

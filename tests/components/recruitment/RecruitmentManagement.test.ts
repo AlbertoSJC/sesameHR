@@ -13,11 +13,13 @@ import { createPinia, setActivePinia } from 'pinia';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
 const mockResponse = [{ id: '1', name: VacancyStatusText.Default, order: 1, companyId: '123', vacancyId: '456', index: 0 }];
+const mockCandidatesResponse = [{ id: '1', firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com', vacancyId: 'vacancyId', statusId: 'statusId' }];
 const mockError = new Error('Network Error');
 
 vi.mock('@services/apiService', () => ({
   default: {
     fetchCandidatureStatuses: vi.fn().mockResolvedValue([]),
+    fetchCandidates: vi.fn().mockResolvedValue([]),
   },
 }));
 
@@ -32,27 +34,36 @@ describe('RecruitmentManagement', () => {
     expect(wrapper).toBeDefined();
   });
 
-  test('Should call apiService.fetchCandidatureStatuses on mount and update the store', async () => {
+  test('Should call apiService.fetchCandidatureStatuses and apiService.fetchCandidates on mount and update the store', async () => {
     const recruitmentStore = useRecruitmentStore();
 
     vi.mocked(apiService.fetchCandidatureStatuses).mockResolvedValueOnce(mockResponse);
+    vi.mocked(apiService.fetchCandidates).mockResolvedValueOnce(mockCandidatesResponse);
 
     const wrapper = mount(RecruitmentManagement);
 
     await wrapper.vm.$nextTick();
 
+    await flushPromises();
+
     expect(apiService.fetchCandidatureStatuses).toHaveBeenCalled();
+    expect(apiService.fetchCandidates).toHaveBeenCalled();
     expect(recruitmentStore.vacancyStatusList.statuses[0]).toEqual(new VacancyStatus(mockResponse[0]));
+    expect(recruitmentStore.candidateList.candidates[0].firstName).toBe(mockCandidatesResponse[0].firstName);
   });
 
-  test('Should handle errors from apiService.fetchCandidatureStatuses', async () => {
+  test('Should handle errors from apiService.fetchCandidatureStatuses and apiService.fetchCandidates', async () => {
     vi.mocked(apiService.fetchCandidatureStatuses).mockRejectedValueOnce(mockError);
+    vi.mocked(apiService.fetchCandidates).mockRejectedValueOnce(mockError);
 
     const wrapper = shallowMount(RecruitmentManagement);
 
     await wrapper.vm.$nextTick();
 
+    await flushPromises();
+
     expect(apiService.fetchCandidatureStatuses).toHaveBeenCalled();
+    expect(apiService.fetchCandidates).toHaveBeenCalled();
   });
 
   test('Should render LoaderElement while loading', async () => {

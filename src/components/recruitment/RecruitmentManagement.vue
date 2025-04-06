@@ -12,6 +12,7 @@ const recruitmentStore = useRecruitmentStore();
 
 onMounted(async () => {
   await recruitmentStore.fetchVacancyStatuses();
+  await recruitmentStore.fetchCandidates();
   recruitmentStore.loading = false;
 });
 </script>

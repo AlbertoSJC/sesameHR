@@ -43,7 +43,7 @@ describe('apiService', () => {
 
     const result = await apiService.fetchCandidates();
 
-    expect(axios.get).toHaveBeenCalledWith(`${ENV_VARIABLES.PUBLIC_BASE_API_URL}/recruitment/v1/vacancies/${ENV_VARIABLES.PUBLIC_VACANCY_ID}/candidate`, {
+    expect(axios.get).toHaveBeenCalledWith(`${ENV_VARIABLES.PUBLIC_BASE_API_URL}/recruitment/v1/vacancies/${ENV_VARIABLES.PUBLIC_VACANCY_ID}/candidates`, {
       headers: {
         accept: 'application/json',
         Authorization: `Bearer ${ENV_VARIABLES.PUBLIC_API_TOKEN}`,

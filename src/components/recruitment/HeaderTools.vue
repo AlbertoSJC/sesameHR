@@ -17,7 +17,7 @@ const openModal = () => {
 <template>
   <div class="flex flex-row items-center justify-between height-fit max-h-[32px]">
     <TextInput placeholder="Buscar" icon="src/images/icon-search.svg" v-model="recruitmentStore.recruitmentFilterInput" />
-    <ButtonElement text="Añadir candidato" classes="text-sm" @click="openModal" />
+    <ButtonElement text="Añadir candidato" classes="text-sm" @click="openModal" :disabled="recruitmentStore.loading" />
     <CreateCandidateModal />
   </div>
 </template>
