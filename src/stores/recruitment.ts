@@ -88,6 +88,7 @@ export const useRecruitmentStore = defineStore('recruitment', () => {
         .saveCandidate(candidateToUpload.value.toApiJson())
         .then((response) => {
           candidateList.value.addCandidate(new Candidate(response));
+          candidateList.value.getCandidatesOrdered();
           candidateToUpload.value = new Candidate();
           formStatus.value = ModalFormSuccess.Success;
         })
