@@ -11,7 +11,7 @@ const modelValue = defineModel<string>();
     <label v-if="label" :for="id" class="font-semibold text-secondary-blue">{{ label }}</label>
     <input
       v-model="modelValue"
-      :class="['my-1 border border-primary-white bg-secondary-white text-primary-grey p-1.25 rounded-xl outline-0', classes, { 'text-black': modelValue, 'w-full': widthFull }]"
+      :class="['my-1 border border-primary-white bg-secondary-white text-primary-grey p-1.25 rounded-xl outline-0', classes, { '!text-black': modelValue, 'w-full': widthFull }]"
       type="date"
       :id="id"
       :placeholder="placeholder"

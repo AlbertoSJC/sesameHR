@@ -22,7 +22,7 @@ watch(modelValue, (newValue) => {
       :class="[
         'my-1 border border-primary-white bg-secondary-white text-primary-grey p-1.25 rounded-xl outline-0',
         classes,
-        { 'text-black': modelValue !== null && modelValue !== undefined, 'w-full': widthFull },
+        { '!text-black': modelValue !== null && modelValue !== undefined, 'w-full': widthFull },
       ]"
       type="number"
       :id="id"

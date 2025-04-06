@@ -24,7 +24,7 @@ const modelValue = defineModel<string>();
         :class="[
           'my-1 border border-primary-white bg-secondary-white text-primary-grey p-1.25 rounded-xl outline-0',
           classes,
-          { 'pl-6': icon, 'text-black': modelValue && modelValue.length > 0, 'w-full': widthFull },
+          { 'pl-6': icon, '!text-black': modelValue && modelValue.length > 0, 'w-full': widthFull },
         ]"
         type="text"
         :id="id"

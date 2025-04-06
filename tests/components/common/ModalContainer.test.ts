@@ -6,6 +6,7 @@ import ModalContainer from '@components/common/ModalContainer.vue';
 
 describe('ModalContainer', () => {
   let modalsStore: ReturnType<typeof useModalsStore>;
+
   beforeEach(() => {
     setActivePinia(createPinia());
     modalsStore = useModalsStore();
@@ -68,5 +69,22 @@ describe('ModalContainer', () => {
 
     await wrapper.find('.modal-content').trigger('click');
     expect(toggleModalSpy).not.toHaveBeenCalled();
+  });
+
+  test('should close the modal when clicking the close button', async () => {
+    const toggleModalSpy = vi.spyOn(modalsStore, 'toggleModal');
+
+    modalsStore.listModalIds[ModalIds.CreateCandidate] = true;
+
+    const wrapper = mount(ModalContainer, {
+      props: { modalId: ModalIds.CreateCandidate },
+      slots: {
+        default: '<div>Modal Content</div>',
+      },
+    });
+
+    const closeButton = wrapper.find('.close-button-modal');
+    await closeButton.trigger('click');
+    expect(toggleModalSpy).toHaveBeenCalledWith(ModalIds.CreateCandidate);
   });
 });
