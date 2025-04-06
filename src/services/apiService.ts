@@ -27,7 +27,7 @@ const apiService = {
       const response = await axios.get(`${ENV_VARIABLES.PUBLIC_BASE_API_URL}/recruitment/v1/vacancies/${ENV_VARIABLES.PUBLIC_VACANCY_ID}/candidates`, {
         headers: mainHeader,
       });
-      console.log('Just checkin my data', response.data);
+
       return response.data.data;
     } catch (error) {
       console.log('Error fetching candidates:', error);

@@ -1,6 +1,7 @@
 import type { CandidateInformation } from '@domain/Candidate';
 
 export const mockCandidateData: CandidateInformation = {
+  id: '3fa85f64-5717-4562-b3fc-2c963f66afa3',
   firstName: 'John',
   lastName: 'Doe',
   email: 'john.doe@example.com',
@@ -15,6 +16,7 @@ export const mockCandidateData: CandidateInformation = {
 };
 
 export const mockPartialCandidateData: CandidateInformation = {
+  id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
   firstName: 'Jane',
   lastName: 'Smith',
   email: 'jane.smith@example.com',

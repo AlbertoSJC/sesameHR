@@ -16,7 +16,7 @@ export class AllVacancyStatus {
   }
 
   addStatus(status: VacancyStatus) {
-    this.statuses.push(status);
+    if (!this.findStatusById(status.id)) this.statuses.push(status);
   }
 
   editStatus(status: VacancyStatus) {

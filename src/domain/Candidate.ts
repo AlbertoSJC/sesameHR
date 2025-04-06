@@ -11,6 +11,8 @@ export interface CandidateInformation {
   startWorkDate?: string;
   web?: string;
   location?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export class Candidate {
@@ -26,6 +28,8 @@ export class Candidate {
   startWorkDate?: string;
   web?: string;
   location?: string;
+  createdAt?: string;
+  updatedAt?: string;
 
   constructor(data?: CandidateInformation) {
     this.id = data?.id;
@@ -40,6 +44,8 @@ export class Candidate {
     this.location = data?.location;
     this.vacancyId = data?.vacancyId;
     this.statusId = data?.statusId;
+    this.createdAt = data?.createdAt;
+    this.updatedAt = data?.updatedAt;
   }
 
   toApiJson(): CandidateInformation {
@@ -48,14 +54,16 @@ export class Candidate {
       firstName: this.firstName ?? '',
       lastName: this.lastName ?? '',
       email: this.email ?? '',
+      vacancyId: this.vacancyId ?? '',
+      statusId: this.statusId ?? '',
       phone: String(this.phone),
       linkedinURL: this.linkedinURL,
       desiredSalary: String(this.desiredSalary),
       startWorkDate: this.startWorkDate,
       web: this.web,
       location: this.location,
-      vacancyId: this.vacancyId ?? '',
-      statusId: this.statusId ?? '',
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
     };
   }
 }

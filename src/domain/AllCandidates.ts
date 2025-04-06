@@ -16,7 +16,7 @@ export class AllCandidates {
   }
 
   addCandidate(candidate: Candidate) {
-    this.candidates.push(candidate);
+    if (candidate.id && !this.findCandidateById(candidate.id)) this.candidates.push(candidate);
   }
 
   editCandidate(candidate: Candidate) {
