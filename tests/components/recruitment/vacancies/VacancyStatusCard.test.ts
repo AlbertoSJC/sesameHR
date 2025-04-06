@@ -1,10 +1,12 @@
 import VacancyStatusCard from '@components/recruitment/vacancies/VacancyStatusCard.vue';
 import { AllVacancyStatus } from '@domain/AllVacancyStatus';
+import { Candidate } from '@domain/Candidate';
 import { VacancyStatusText } from '@domain/VacancyStatus';
 import { useRecruitmentStore } from '@stores/recruitment';
+import { mockCandidateData } from '@tests/mocks/candidateMocks';
 import { mockVacancyStatuses } from '@tests/mocks/vacancyMocks';
 import { vacancyStatusCardOutput } from '@typesOrigin/recruitment';
-import { mount } from '@vue/test-utils';
+import { flushPromises, mount } from '@vue/test-utils';
 import { createPinia, setActivePinia } from 'pinia';
 
 describe('VacancyStatusCard', () => {
@@ -18,7 +20,6 @@ describe('VacancyStatusCard', () => {
 
   test('Should mount correctly', () => {
     const wrapper = mount(VacancyStatusCard, { props: { status: recruitmentStore.vacancyStatusList.statuses[0], index: 0 } });
-
     expect(wrapper).toBeDefined();
   });
 
@@ -26,7 +27,6 @@ describe('VacancyStatusCard', () => {
     const wrapperEven = mount(VacancyStatusCard, {
       props: { status: recruitmentStore.vacancyStatusList.statuses[0], index: 0 },
     });
-
     expect(wrapperEven.classes()).toContain('bg-white');
 
     const wrapperOdd = mount(VacancyStatusCard, {
@@ -39,11 +39,9 @@ describe('VacancyStatusCard', () => {
     const wrapper = mount(VacancyStatusCard, {
       props: { status: null, index: 0 },
     });
-
     const img = wrapper.find('img');
     const span = wrapper.find('span');
     const hr = wrapper.find('hr');
-
     expect(img.attributes('src')).toContain('default.svg');
     expect(span.text()).toBe('Recruitment');
     expect(hr.attributes('style')).toContain('background-color: #808080;');
@@ -54,16 +52,22 @@ describe('VacancyStatusCard', () => {
       const wrapper = mount(VacancyStatusCard, {
         props: { status, index },
       });
-
       const img = wrapper.find('img');
       const span = wrapper.find('span');
       const hr = wrapper.find('hr');
-
       expect(img.attributes('src')).toContain(`${vacancyStatusCardOutput[status?.name ?? VacancyStatusText.Default].imgSrc}.svg`);
-
       expect(span.text()).toBe(status.name);
-
       expect(hr.attributes('style')).toContain(`background-color: ${vacancyStatusCardOutput[status?.name ?? VacancyStatusText.Default].color};`);
     });
+  });
+
+  test('Should handle drop and update candidate status', async () => {
+    const wrapper = mount(VacancyStatusCard, {
+      props: { status: recruitmentStore.vacancyStatusList.statuses[1], index: 1 },
+    });
+    recruitmentStore.candidateBeingDragged = new Candidate(mockCandidateData);
+    await wrapper.trigger('drop');
+    expect(recruitmentStore.candidateBeingDragged).toBeNull();
+    expect(recruitmentStore.candidateToUpload.statusId).toBe(recruitmentStore.vacancyStatusList.statuses[1].id);
   });
 });

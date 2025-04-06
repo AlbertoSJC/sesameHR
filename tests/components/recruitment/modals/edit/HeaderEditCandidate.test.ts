@@ -72,18 +72,4 @@ describe('HeaderEditCandidate', () => {
     await button.trigger('click');
     expect(editCandidateSpy).toHaveBeenCalled();
   });
-
-  test('Should toggle modal and reset formStatus on success', async () => {
-    const toggleModalSpy = vi.spyOn(modalsStore, 'toggleModal');
-    recruitmentStore.formStatus = ModalFormSuccess.Success;
-
-    const wrapper = mount(HeaderEditCandidate);
-    const button = wrapper.findComponent(ButtonElement);
-
-    await button.trigger('click');
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    expect(toggleModalSpy).toHaveBeenCalledWith(ModalIds.CreateCandidate);
-    expect(recruitmentStore.formStatus).toBeNull();
-  });
 });

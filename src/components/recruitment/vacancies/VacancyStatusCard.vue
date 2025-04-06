@@ -15,10 +15,29 @@ const recruitmentStore = useRecruitmentStore();
 const { status } = defineProps<VacancyStatusCardProps>();
 
 const getCurrentStatus = computed(() => vacancyStatusCardOutput[status?.name ?? VacancyStatusText.Default]);
+
+const handleDragOver = (event: DragEvent) => {
+  event.preventDefault();
+};
+
+const handleDrop = async () => {
+  if (recruitmentStore.candidateBeingDragged) {
+    recruitmentStore.candidateToUpload = recruitmentStore.candidateBeingDragged;
+    recruitmentStore.candidateBeingDragged = null;
+    if (recruitmentStore.candidateToUpload.statusId !== status?.id) {
+      recruitmentStore.candidateToUpload.statusId = status?.id;
+      await recruitmentStore.editCandidate();
+    }
+  }
+};
 </script>
 
 <template>
-  <div :class="['flex flex-col h-full w-full min-w-[296px] p-4 gap-4 border-1 border-primary-white rounded-xl', index % 2 !== 0 ? 'bg-secondary-white' : 'bg-white']">
+  <div
+    @dragover="handleDragOver"
+    @drop="handleDrop"
+    :class="['flex flex-col h-full w-full min-w-[296px] p-4 gap-4 border-1 border-primary-white rounded-xl', index % 2 !== 0 ? 'bg-secondary-white' : 'bg-white']"
+  >
     <div class="flex flex-col gap-3">
       <hr
         :class="[`h-[4px] border-0 rounded-4xl`]"

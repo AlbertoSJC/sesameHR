@@ -16,6 +16,7 @@ export const useRecruitmentStore = defineStore('recruitment', () => {
   const vacancyStatusList = ref<AllVacancyStatus>(new AllVacancyStatus());
   const candidateList = ref<AllCandidates>(new AllCandidates());
   const candidateToUpload = ref<Candidate>(new Candidate());
+  const candidateBeingDragged = ref<Candidate | null>(null);
   const errors = ref<Partial<SchemaCandidateErrors> | null>(null);
   const vacancyTabs = ref<Record<RecruitmentTabs, boolean>>({
     [RecruitmentTabs.Vacancies]: true,
@@ -115,6 +116,7 @@ export const useRecruitmentStore = defineStore('recruitment', () => {
     recruitmentFilterInput,
     candidateToUpload,
     candidateList,
+    candidateBeingDragged,
 
     fetchVacancyStatuses,
     fetchCandidates,

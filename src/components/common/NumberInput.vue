@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ExtendedInputProps } from '@typesOrigin/recruitment';
-import { defineProps, watch } from 'vue';
+import { watch } from 'vue';
 
 defineProps<ExtendedInputProps>();
 
