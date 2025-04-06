@@ -12,22 +12,22 @@ const editCandidate = async () => {
   await recruitmentStore.editCandidate();
   setTimeout(() => {
     if (recruitmentStore.formStatus === ModalFormSuccess.Success) {
-      modalsStore.toggleModal(ModalIds.CreateCandidate);
+      modalsStore.toggleModal(ModalIds.EditCandidate);
     }
     recruitmentStore.formStatus = null;
   }, 1500);
 };
 
 const buttonFormClasses = computed(() => {
-  if (recruitmentStore.formStatus === ModalFormSuccess.Success) return 'bg-[#137019] border-[#137019] hover:!bg-[#137019] hover:!border-[#137019] text-white pointer-none font-bold';
-  if (recruitmentStore.formStatus === ModalFormSuccess.Failure) return 'bg-[#801111] border-[#801111] hover:!bg-[#801111] hover:!border-[#801111] text-white pointer-none font-bold';
+  if (recruitmentStore.formStatus === ModalFormSuccess.Success) return 'bg-[#137019] border-[#137019] hover:!bg-[#137019] hover:!border-[#137019] text-white hover:text-white pointer-none font-bold';
+  if (recruitmentStore.formStatus === ModalFormSuccess.Failure) return 'bg-[#801111] border-[#801111] hover:!bg-[#801111] hover:!border-[#801111] text-white hover:text-white pointer-none font-bold';
   return '';
 });
 
 const buttonFormText = computed(() => {
   if (recruitmentStore.formStatus === ModalFormSuccess.Success) return 'Editado!';
   if (recruitmentStore.formStatus === ModalFormSuccess.Failure) return 'Error!';
-  return 'Guardar';
+  return 'Editar';
 });
 </script>
 

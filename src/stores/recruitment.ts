@@ -74,6 +74,7 @@ export const useRecruitmentStore = defineStore('recruitment', () => {
       .fetchCandidates()
       .then((response) => {
         candidateList.value = new AllCandidates(response);
+        candidateList.value.getCandidatesOrdered();
       })
       .catch((error) => {
         console.log(error);
@@ -104,6 +105,7 @@ export const useRecruitmentStore = defineStore('recruitment', () => {
         .editCandidate(candidateToUpload.value.toApiJson())
         .then((response) => {
           candidateList.value.editCandidate(new Candidate(response));
+          candidateList.value.getCandidatesOrdered();
           formStatus.value = ModalFormSuccess.Success;
         })
         .catch((error) => {
