@@ -1,10 +1,17 @@
-import { describe, test, expect } from 'vitest';
+import { describe, test, expect, beforeEach, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
+import { createPinia, setActivePinia } from 'pinia';
 import CandidatesListCard from '@components/recruitment/candidates/CandidatesListCard.vue';
 import CandidateInformationCard from '@components/recruitment/candidates/CandidateInformationCard.vue';
+import ButtonElement from '@components/common/ButtonElement.vue';
+import { useRecruitmentStore } from '@stores/recruitment';
+import { useModalsStore, ModalIds } from '@stores/modals';
 import { Candidate } from '@domain/Candidate';
 
 describe('CandidatesListCard.vue', () => {
+  let recruitmentStore: ReturnType<typeof useRecruitmentStore>;
+  let modalsStore: ReturnType<typeof useModalsStore>;
+
   const mockCandidate = new Candidate({
     id: '1',
     firstName: 'John',
@@ -16,6 +23,12 @@ describe('CandidatesListCard.vue', () => {
     updatedAt: '2025-03-15',
     vacancyId: 'vacancy-123',
     statusId: 'status-456',
+  });
+
+  beforeEach(() => {
+    setActivePinia(createPinia());
+    recruitmentStore = useRecruitmentStore();
+    modalsStore = useModalsStore();
   });
 
   test('renders candidate information correctly', () => {
@@ -50,7 +63,7 @@ describe('CandidatesListCard.vue', () => {
     expect(wrapperOdd.classes()).toContain('bg-secondary-white');
   });
 
-  test('renders CandidateInformationCard component', () => {
+  test('renders CandidateInformationCard component when candidate is provided', () => {
     const wrapper = mount(CandidatesListCard, {
       props: {
         candidate: mockCandidate,
@@ -73,5 +86,35 @@ describe('CandidatesListCard.vue', () => {
 
     const informationCard = wrapper.findComponent(CandidateInformationCard);
     expect(informationCard.exists()).toBe(false);
+  });
+
+  test('renders the edit button and triggers editCandidate method on click', async () => {
+    const wrapper = mount(CandidatesListCard, {
+      props: {
+        candidate: mockCandidate,
+        index: 0,
+      },
+    });
+
+    const editButton = wrapper.findComponent(ButtonElement);
+    expect(editButton.exists()).toBe(true);
+    expect(editButton.props('text')).toBe('Editar');
+
+    await editButton.trigger('click');
+
+    expect(recruitmentStore.candidateToUpload).toEqual(mockCandidate);
+    expect(modalsStore.listModalIds[ModalIds.EditCandidate]).toBe(true);
+  });
+
+  test('renders the correct status icon', () => {
+    const wrapper = mount(CandidatesListCard, {
+      props: {
+        candidate: mockCandidate,
+        index: 0,
+      },
+    });
+
+    const statusIcon = wrapper.find('img[src="src/images/status/default.svg"]');
+    expect(statusIcon.exists()).toBe(true);
   });
 });
